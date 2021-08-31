@@ -2,7 +2,7 @@ import time
 
 from random import randint
 
-from lib.process import Process
+from library.process import Process
 
 # Generate up to 10 processes
 processes = list()
