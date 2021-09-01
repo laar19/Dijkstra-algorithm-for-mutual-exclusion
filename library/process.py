@@ -6,10 +6,10 @@ host = "127.0.0.1"
 
 class Process:
     def __init__(self, i, port_range, cs_port, N=None, K=None, S=0, L=0, require_access=0):
-        self.i              = i              # This process id
+        self.i              = i + 1          # This process id
         self.port_range     = port_range     # Port range, i.e. 40000, 50000, etc
         self.cs_port        = cs_port        # Critical section port
-        self.N              = N              # Number of process
+        self.N              = N              # Number of processes
         self.K              = K              # Constant number
         self.S              = S              # This process status
         self.L              = L              # Last process status
@@ -52,12 +52,12 @@ class Process:
     def subprocess_3(self, L, lap_number):
         # If require_Access == 0 or True
         if self.require_access == 0:                       # When need_access_to_critical_section Do
-            if self.i == 0:                                #    If (i = 0) then
+            if self.i == 1:                                #    If (i = 0) then
                 if L == self.S:                            #        When ( L = S ) Do
                     print("\nP: {} IN CS".format(self.i))  #            go_to_critical_section();
                     message = "Process {} of {} accessed the critical section on lap {}" \
-                        .format(self.i, self.K, lap_number)#                  (custom implementation)
-                    thread = self.send_message(host, self.cs_port, message) # (custom implementation)
+                        .format(self.i, self.K, lap_number)#            go_to_critical_section();
+                    thread = self.send_message(host, self.cs_port, message) # go_to_critical_section();
                     Thread(target=thread).start()          #            go_to_critical_section();
                     self.S = (L + 1) % self.K              #            S = (L + 1) mod K;
                     self.L = L                             #            (custom implementation)
@@ -66,8 +66,8 @@ class Process:
                 if L != self.S:                            #        When ( L <> S ) Do
                     print("\nP: {} IN CS".format(self.i))  #            go_to_critical_section();
                     message = "Process {} of {} accessed the critical section on lap {}" \
-                        .format(self.i, self.K, lap_number)#                  (custom implementation)
-                    thread = self.send_message(host, self.cs_port, message) # (custom implementation)
+                        .format(self.i, self.K, lap_number)#            go_to_critical_section();
+                    thread = self.send_message(host, self.cs_port, message) # go_to_critical_section();
                     Thread(target=thread).start()          #            go_to_critical_section();
                     self.S = L                             #            S = L;
                     self.L = L                             #            (custom implementation)

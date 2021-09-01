@@ -30,7 +30,7 @@ if __name__ == "__main__":
     count = 0
     top   = 3 # Max number of laps
     while count != top:
-        print("\n########## run {} ##########\n".format(count+1))
+        print("\n########## Lap {} ##########\n".format(count+1))
         
         for i in range(len(processes)):
             processes[i].require_access = randint(0, 1) # Random "require access" for each process
